@@ -1,0 +1,7 @@
+name: pong
+services:
+    pong:
+        ports:
+            - 8002:80
+        container_name: pong
+        image: pong
