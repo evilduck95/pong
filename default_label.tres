@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bia84alm3nrto"]
+
+[ext_resource type="FontFile" uid="uid://fnnnwsk0x47v" path="res://fonts/Fish.ttf" id="1_lqnip"]
+
+[resource]
+font = ExtResource("1_lqnip")
+font_size = 130

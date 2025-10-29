@@ -1,0 +1,182 @@
+[gd_scene load_steps=22 format=3 uid="uid://dup6rfdrivbis"]
+
+[ext_resource type="Texture2D" uid="uid://bjufuhw7abkbn" path="res://sprites/paddle.png" id="1_fefid"]
+[ext_resource type="VideoStream" path="res://videos/fish.ogv" id="1_qfj7y"]
+[ext_resource type="Script" path="res://player.gd" id="1_s4aua"]
+[ext_resource type="Script" path="res://background_video.gd" id="2_jgt0e"]
+[ext_resource type="Texture2D" uid="uid://bsc0b7pv63v76" path="res://sprites/fishbg.webp" id="3_lbmkl"]
+[ext_resource type="Texture2D" uid="uid://bnx617t7jmiln" path="res://sprites/ball.png" id="3_mak0q"]
+[ext_resource type="Script" path="res://ball.gd" id="3_wfgny"]
+[ext_resource type="AudioStream" uid="uid://3yqeve3eehbf" path="res://sounds/boing.mp3" id="8_5yl77"]
+[ext_resource type="Script" path="res://ai_player.gd" id="8_v3sa2"]
+[ext_resource type="Script" path="res://audio_stream_player.gd" id="9_7wwwq"]
+[ext_resource type="LabelSettings" uid="uid://bia84alm3nrto" path="res://default_label.tres" id="10_m71mw"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="10_mhtqf"]
+[ext_resource type="LabelSettings" uid="uid://btdn15ov62fn2" path="res://small_label.tres" id="11_oy2j6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kso0e"]
+b = Vector2(-1, 649)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kke84"]
+b = Vector2(1152, -1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_luv8r"]
+b = Vector2(-1, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_c24hc"]
+b = Vector2(1151, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sn82o"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ympj"]
+radius = 24.0208
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ghwxg"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3dwg"]
+
+[node name="Pong" type="Node2D"]
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="Left" type="StaticBody2D" parent="Arena"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/Left"]
+position = Vector2(88, 0)
+shape = SubResource("SegmentShape2D_kso0e")
+
+[node name="Top" type="StaticBody2D" parent="Arena"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/Top"]
+shape = SubResource("SegmentShape2D_kke84")
+
+[node name="Right" type="StaticBody2D" parent="Arena"]
+position = Vector2(1062, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/Right"]
+shape = SubResource("SegmentShape2D_luv8r")
+
+[node name="Bottom" type="StaticBody2D" parent="Arena"]
+position = Vector2(0, 650)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/Bottom"]
+shape = SubResource("SegmentShape2D_c24hc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arena"]
+position = Vector2(576.5, 325.5)
+scale = Vector2(0.724375, 0.550126)
+texture = ExtResource("3_lbmkl")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Arena"]
+offset_right = 1155.0
+offset_bottom = 651.0
+stream = ExtResource("1_qfj7y")
+expand = true
+script = ExtResource("2_jgt0e")
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2(536, 336)
+collision_layer = 2
+collision_mask = 2
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_sn82o")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("3_wfgny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+scale = Vector2(0.75, 0.75)
+shape = SubResource("CircleShape2D_8ympj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+modulate = Color(0.615686, 0.141176, 1, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_mak0q")
+
+[node name="Player" type="RigidBody2D" parent="." groups=["players"]]
+position = Vector2(100, 325)
+disable_mode = 1
+collision_layer = 3
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_ghwxg")
+lock_rotation = true
+script = ExtResource("1_s4aua")
+metadata/player_1 = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_m3dwg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+modulate = Color(0.129412, 0.309804, 0.792157, 1)
+position = Vector2(-1.99676e-06, -0.499997)
+scale = Vector2(0.44, 2.02)
+texture = ExtResource("1_fefid")
+
+[node name="Player2" type="RigidBody2D" parent="." groups=["players"]]
+position = Vector2(1050, 325)
+disable_mode = 1
+collision_layer = 3
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_ghwxg")
+lock_rotation = true
+script = ExtResource("8_v3sa2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+scale = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_m3dwg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+modulate = Color(1, 0.243137, 0.164706, 1)
+position = Vector2(-1.99676e-06, -0.499997)
+scale = Vector2(0.44, 2.02)
+texture = ExtResource("1_fefid")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5yl77")
+volume_db = -30.0
+script = ExtResource("9_7wwwq")
+
+[node name="Pause Menu" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("10_mhtqf")
+
+[node name="Title" type="Label" parent="Pause Menu"]
+offset_left = 1.0
+offset_top = 40.0
+offset_right = 1154.0
+offset_bottom = 170.0
+text = "Fish Pong"
+label_settings = ExtResource("10_m71mw")
+horizontal_alignment = 1
+
+[node name="Player 1 Controls" type="Label" parent="Pause Menu"]
+offset_left = 304.0
+offset_top = 216.0
+offset_right = 859.0
+offset_bottom = 567.0
+text = "Controls
+Up is w or Arrow Up
+Down is S or arrow down"
+label_settings = ExtResource("11_oy2j6")
+
+[node name="Instruction" type="Label" parent="Pause Menu"]
+offset_left = 1.0
+offset_top = 552.0
+offset_right = 1153.0
+offset_bottom = 627.0
+text = "Press Enter to start"
+label_settings = ExtResource("11_oy2j6")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
+[connection signal="body_entered" from="Ball" to="AudioStreamPlayer" method="_on_ball_body_entered"]
+[connection signal="dead" from="Ball" to="Arena/VideoStreamPlayer" method="_on_ball_dead"]
+[connection signal="dead" from="Ball" to="Pause Menu" method="_on_ball_dead"]
