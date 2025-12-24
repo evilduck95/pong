@@ -70,6 +70,7 @@ collision_mask = 3
 shape = SubResource("SegmentShape2D_c24hc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Arena"]
+modulate = Color(0.589096, 0.589096, 0.589096, 1)
 position = Vector2(576.5, 325.5)
 scale = Vector2(0.724375, 0.550126)
 texture = ExtResource("3_lbmkl")

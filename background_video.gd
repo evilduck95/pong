@@ -10,3 +10,7 @@ func _process(delta: float) -> void:
 
 func _on_ball_dead() -> void:
 	playing = true
+
+
+func _on_mouse_input_mouse_entered() -> void:
+	print("enter")
