@@ -151,21 +151,31 @@ script = ExtResource("10_mhtqf")
 
 [node name="Title" type="Label" parent="Pause Menu"]
 offset_left = 1.0
-offset_top = 40.0
+offset_top = 24.0
 offset_right = 1154.0
-offset_bottom = 170.0
+offset_bottom = 154.0
 text = "Fish Pong"
 label_settings = ExtResource("10_m71mw")
 horizontal_alignment = 1
 
-[node name="Player 1 Controls" type="Label" parent="Pause Menu"]
-offset_left = 304.0
-offset_top = 216.0
-offset_right = 859.0
-offset_bottom = 567.0
-text = "Controls
-Up is w or Arrow Up
-Down is S or arrow down"
+[node name="Player 1 Header" type="Label" parent="Pause Menu"]
+offset_left = 72.0
+offset_top = 193.0
+offset_right = 786.0
+offset_bottom = 260.0
+scale = Vector2(1.3, 1.3)
+text = "Controls"
+label_settings = ExtResource("11_oy2j6")
+horizontal_alignment = 1
+
+[node name="Player 1 Controls2" type="Label" parent="Pause Menu"]
+offset_left = 248.0
+offset_top = 281.0
+offset_right = 962.0
+offset_bottom = 632.0
+text = "Up is w
+Down is S
+Or use click or tap to move"
 label_settings = ExtResource("11_oy2j6")
 
 [node name="Instruction" type="Label" parent="Pause Menu"]
