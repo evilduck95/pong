@@ -16,10 +16,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel") and not game_over and not game_start:
 		invert_pause()
 	# Restart after game over
-	if game_over and Input.is_action_just_pressed("ui_accept"):
+	if game_over and Input.is_action_just_pressed("click"):
 		get_tree().reload_current_scene()
 	# First start of game
-	if game_start and Input.is_action_just_pressed("ui_accept"):
+	if game_start and Input.is_action_just_pressed("click"):
 		game_start = false
 		invert_pause()
 		# Setup text for pause screen
