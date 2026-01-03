@@ -37,5 +37,5 @@ func _on_ball_dead() -> void:
 	game_paused = true
 	player_1_controls.visible = false
 	title.text = "Game Over"
-	instruction.text = "Press enter to restart"
+	instruction.text = "Click to restart"
 	visible = true
